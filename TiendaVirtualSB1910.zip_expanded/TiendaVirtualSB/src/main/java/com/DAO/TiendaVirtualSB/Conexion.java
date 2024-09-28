@@ -7,17 +7,17 @@ import java.sql.*;
  */
 public class Conexion {
    /**Parametros de conexion*/
-   static String bd = "dbgrupo12";
-   static String login = "admin";
-   static String password = "dbgrupo12";
-   static String url = "jdbc:mysql://dbgrupo12.czo3ixoe3xoe.us-east-1.rds.amazonaws.com/"+bd;
+   static String bd = "sd-tienda";
+   static String login = "citizix_user";
+   static String password = "S3cret";
+   static String url = "jdbc:postgresql://localhost:5432/"+bd;
 
    Connection connection = null;
    /** Constructor de DbConnection */
    public Conexion() {
       try{
          //obtenemos el driver de para mysql
-         Class.forName("org.mariadb.jdbc.Driver");
+         Class.forName("org.postgresql.Driver");
          //obtenemos la conexión
          connection = DriverManager.getConnection(url,login,password);
          if (connection!=null){
@@ -37,6 +37,12 @@ public class Conexion {
       return connection;
    }
    public void desconectar(){
+	  try {
+		connection.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
       connection = null;
    }
 }

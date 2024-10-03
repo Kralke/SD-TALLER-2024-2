@@ -1,6 +1,6 @@
 package com.DTO.TiendaVirtualSB;
 
-public class Ventas {
+public class VentasVO {
 
 	private int codigo_venta;
 	private int cedula_cliente;
@@ -9,7 +9,7 @@ public class Ventas {
 	private double total_venta;
 	private double valor_venta;
 	
-	public Ventas(int codigo_venta, int cedula_cliente, int cedula_uduario, double ivaventa, double total_venta,
+	public VentasVO(int codigo_venta, int cedula_cliente, int cedula_uduario, double ivaventa, double total_venta,
 			double valor_venta) {
 		super();
 		this.codigo_venta = codigo_venta;

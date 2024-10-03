@@ -1,6 +1,6 @@
 package com.DTO.TiendaVirtualSB;
 
-public class Usuarios{
+public class UsuariosVO{
 	
 	private String cedula_usuario;
 	private String email_usuario;
@@ -8,7 +8,7 @@ public class Usuarios{
 	private String password;
 	private String usuario;
 	
-	public Usuarios(String cedula_usuario, String email_usuario, String nombre_usuario, String password,
+	public UsuariosVO(String cedula_usuario, String email_usuario, String nombre_usuario, String password,
 			String usuario) {
 		super();
 		this.cedula_usuario = cedula_usuario;

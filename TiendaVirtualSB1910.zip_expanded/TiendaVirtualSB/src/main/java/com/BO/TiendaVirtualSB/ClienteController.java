@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.DAO.TiendaVirtualSB.ClienteDAO;
 import com.DAO.TiendaVirtualSB.ProveedorDAO;
-import com.DAO.TiendaVirtualSB.VentasDAO;
+import com.DAO.TiendaVirtualSB.Detalle_VentasDAO;
 import com.DTO.TiendaVirtualSB.ClienteVO;
 import com.DTO.TiendaVirtualSB.ProveedorVO;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -49,7 +49,7 @@ public class ClienteController {
 	
 	@RequestMapping("/consultarVentas")
 	public ArrayList<String> consultarVentas(String tipo) {		
-		VentasDAO dao = new VentasDAO();
-		return dao.consultarConsolidado(tipo);		
+		Detalle_VentasDAO dao = new Detalle_VentasDAO();
+		return dao.consultarDetalles(tipo);		
 	}
 }

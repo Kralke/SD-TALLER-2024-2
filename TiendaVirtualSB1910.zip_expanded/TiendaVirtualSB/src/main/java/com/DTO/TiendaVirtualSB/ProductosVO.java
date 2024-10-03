@@ -1,6 +1,6 @@
 package com.DTO.TiendaVirtualSB;
 
-public class Productos {
+public class ProductosVO {
 
 	private int codigo_producto;
 	private double ivacompra;
@@ -9,7 +9,7 @@ public class Productos {
 	private int precio_compra;
 	private int precio_venta;
 	
-	public Productos(int codigo_producto, double ivacompra, int nitproveedor, String nombre_producto, int precio_compra,
+	public ProductosVO(int codigo_producto, double ivacompra, int nitproveedor, String nombre_producto, int precio_compra,
 			int precio_venta) {
 		super();
 		this.codigo_producto = codigo_producto;

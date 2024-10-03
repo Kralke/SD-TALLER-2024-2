@@ -5,62 +5,45 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-import com.DTO.TiendaVirtualSB.Ventas;
-
-
+import com.DTO.TiendaVirtualSB.VentasVO;
 
 public class VentasDAO {
 	
-	
-	public void insertVentas(Ventas ven) {
-		Conexion conex = new Conexion();
-		try {
-			Statement estatuto = conex.getConnection().createStatement();
-			estatuto.executeUpdate("INSERT INTO ventas(codigo_producto, cantidad, NIT_cliente) VALUES ('" + ven.getCodigo_producto() + "', " + ven.getCantidad()
-					+ ", '" + ven.getNIT_cliente() +"')");
-			estatuto.close();
-			
+	public void registrarVenta(VentasVO cli) 
+	 {
+	  Conexion conex= new Conexion();
+	  try {
+	   Statement estatuto = conex.getConnection().createStatement();
+	   estatuto.executeUpdate("INSERT INTO clientes (codigo_venta ,cedula_cliente ,cedula_usuario ,ivaventa ,total_venta ,valor_venta) VALUES ('"+cli.getCodigo_venta()+"', '"
+	     +cli.getCedula_cliente()+"', '"+cli.getCedula_uduario()+"', '"+cli.getIvaventa()+"', '"+cli.getTotal_venta()+"', '"+cli.getValor_venta()+"')");
+	   estatuto.close();
+	   conex.desconectar();   
+	  } catch (SQLException e) {
+	      System.out.println(e.getMessage());
+	  }
+	 } 
 
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	public ArrayList <String> consultarConsolidado(String tipo) {
-		ArrayList<String> registros = new ArrayList<String>();
-		Conexion conex = new Conexion();
-
-		String sql = "";
-		if (tipo.trim().equals("producto")) {
-			sql = "SELECT codigo_producto AS Item, SUM(cantidad) AS Unidades\r\n"
-					+ "FROM ventas\r\n"
-					+ "GROUP BY codigo_producto\r\n"
-					+ "ORDER BY codigo_producto;";
-			
-		} else if (tipo.trim().equals("cliente")){
-			sql = "SELECT NIT_cliente AS Item, SUM(cantidad) AS Unidades\r\n"
-					+ "FROM ventas\r\n"
-					+ "GROUP BY NIT_cliente\r\n"
-					+ "ORDER BY NIT_cliente;";
-		}
-
-		try {
-			Statement consulta = conex.getConnection().createStatement();
-			ResultSet res = consulta.executeQuery(sql);
-
-			while (res.next()) {
-				registros.add(res.getString("Item")+";"+res.getInt("unidades"));
-
-			}
-			res.close();
-			consulta.close();
-			
-
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "no se pudo consultar el Proveedor\n" + e);
-		}
-		return registros;
-	}
+	 public ArrayList<VentasVO> consultarClientes(String ced) {
+	  ArrayList<VentasVO> clientes = new ArrayList<VentasVO>();
+	  Conexion conex= new Conexion();
+	  String sql = "SELECT * FROM clientes ";
+	  if (!ced.equals("null")) {
+		sql = sql + "WHERE cedula_cli = '" + ced + "'";
+	  }
+	  try {
+		Statement consulta = conex.getConnection().createStatement();
+	    ResultSet res = consulta.executeQuery(sql);   
+	    while (res.next()){
+	    	VentasVO cli = new VentasVO(Integer.valueOf(res.getString("codigo_venta")) ,Integer.valueOf(res.getString("cedula_cliente")),Integer.valueOf(res.getString("cedula_usuario")),
+	    			Double.valueOf(res.getString("ivaventa")),Double.valueOf(res.getString("total_venta")),Double.valueOf(res.getString("valor_venta")));
+	      clientes.add(cli);
+	    }
+	    res.close();
+	    consulta.close();
+	    conex.desconectar();
+	  } catch (Exception e) {
+		  System.out.println(e.getMessage());
+	  }
+	  return clientes;
+	 }
 }

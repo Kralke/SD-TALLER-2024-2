@@ -1,6 +1,6 @@
 package com.DTO.TiendaVirtualSB;
 
-public class Detalle_Ventas {
+public class Detalle_VentasVO {
 	
 	private int codigo_detalle_venta;
 	private int cantidad_producto;
@@ -10,7 +10,7 @@ public class Detalle_Ventas {
 	private double valor_venta;
 	private double valoriva;
 	
-	public Detalle_Ventas(int codigo_detalle_venta, int cantidad_producto, int codigo_producto, int codigo_venta,
+	public Detalle_VentasVO(int codigo_detalle_venta, int cantidad_producto, int codigo_producto, int codigo_venta,
 			double valor_total, double valor_venta, double valoriva) {
 		super();
 		this.codigo_detalle_venta = codigo_detalle_venta;
